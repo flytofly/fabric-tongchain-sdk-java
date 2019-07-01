@@ -1,0 +1,89 @@
+Organizations:
+    - &OrdererOrg
+        Name: tcordererOrg
+        ID: tcordererMSP
+        MSPDir: crypto-config/ordererOrganizations/tcorderer/msp
+    - &tongchain
+        Name: tongchainMSP
+        ID: tongchainMSP
+        MSPDir: crypto-config/peerOrganizations/tongchain/msp
+        AnchorPeers:
+            - Host: peer0.tongchain
+              Port: 7051
+    - &qifubao
+        Name: qifubaoMSP
+        ID: qifubaoMSP
+        MSPDir: crypto-config/peerOrganizations/qifubao/msp
+        AnchorPeers:
+            - Host: peer0.qifubao
+              Port: 7051
+    - &bank
+        Name: bankMSP
+        ID: bankMSP
+        MSPDir: crypto-config/peerOrganizations/bank/msp
+        AnchorPeers:
+            - Host: peer0.bank
+              Port: 7051
+    - &app
+        Name: appMSP
+        ID: appMSP
+        MSPDir: crypto-config/peerOrganizations/app/msp
+        AnchorPeers:
+            - Host: peer0.app
+              Port: 7051
+Capabilities:
+    Global: &ChannelCapabilities
+        V1_1: true
+    Orderer: &OrdererCapabilities
+        V1_1: true
+    Application: &ApplicationCapabilities
+        V1_2: true
+Application: &ApplicationDefaults
+    Organizations:
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+    Addresses:
+      - tongchain.tcorderer:7050
+      - qifubao.tcorderer:7050
+      - bank.tcorderer:7050
+      - app.tcorderer:7050
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - kafka0:9092
+            - kafka1:9092
+            - kafka2:9092
+            - kafka3:9092
+    Organizations:
+Profiles:
+    TCOrgsOrdererGenesis:
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *tongchain
+                    - *qifubao
+                    - *bank
+                    - *app
+    TCOrgsChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *tongchain
+                - *qifubao
+                - *bank
+                - *app
+            Capabilities:
+                <<: *ApplicationCapabilities
