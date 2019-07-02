@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 istls=true
 
 #chaincode
@@ -29,4 +30,37 @@ org3=peer0
 org3peer0=orgname=org3,mspid=org3MSP,peerdomainname=org3,peername=peer0.org3,peerlocation=grpc://x.x.x.3:7051
 org4=peer0
 org4peer0=orgname=org4,mspid=org4MSP,peerdomainname=org4,peername=peer0.org4,peerlocation=grpc://x.x.x.4:7051
+=======
+istls=true
+
+#chaincode
+chaincodeName=mycc
+chaincodePeerName=peer0.org1
+chaincodeChannelName=testchannel
+chaincodeOrdererName=org1.example.com
+chaincodePath=chaincodedev/chaincode
+chaincodeVersion=1.0
+joinedpeer=peer0.org1,peer0.org2,peer0.org3,peer0.org4
+
+
+#orderers
+orderers=orderer1,orderer2,orderer3,orderer4
+orderer1=domainname=example.com,orderername=org1.example.com,ordererlocation=grpc://x.x.x.1:7050
+orderer2=domainname=example.com,orderername=org2.example.com,ordererlocation=grpc://x.x.x.2:7050
+orderer3=domainname=example.com,orderername=org3.example.com,ordererlocation=grpc://x.x.x.3:7050
+orderer4=domainname=example.com,orderername=org4.example.com,ordererlocation=grpc://x.x.x.4:7050
+orderlist=org1.example.com,org2.example.com,org3.example.com,org4.example.com
+peerlist=peer0.org1,peer0.org2,peer0.org3,peer0.org4
+
+#peers
+org=org1,org2,org3,org4
+org1=peer0
+org1peer0=orgname=org1,mspid=org1MSP,peerdomainname=org1,peername=peer0.org1,peerlocation=grpc://x.x.x.1:7051
+org2=peer0
+org2peer0=orgname=org2,mspid=org2MSP,peerdomainname=org2,peername=peer0.org2,peerlocation=grpc://x.x.x.2:7051
+org3=peer0
+org3peer0=orgname=org3,mspid=org3MSP,peerdomainname=org3,peername=peer0.org3,peerlocation=grpc://x.x.x.3:7051
+org4=peer0
+org4peer0=orgname=org4,mspid=org4MSP,peerdomainname=org4,peername=peer0.org4,peerlocation=grpc://x.x.x.4:7051
+>>>>>>> e62656ee02c66d4ff2586c6ba062c655f8c35447
 profiles=TwoOrgsChannel
