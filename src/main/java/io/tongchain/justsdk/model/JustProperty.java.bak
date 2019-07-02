@@ -33,7 +33,7 @@ public class JustProperty {
 
     public JustProperty(String configPath) throws IOException {
         this.configPath = configPath;
-        String path = configPath+ "/sdk.properties";
+        String path = configPath+ "/justsdk.properties";
         Properties properties = new Properties();
         properties.load(new FileInputStream(path));
         isTls = properties.getProperty(Constant.ISTLS).equals("true")? true : false;
